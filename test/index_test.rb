@@ -3,9 +3,15 @@ require 'test_helper'
 class IndexTest < Test::Unit::TestCase
   context "with a few projects" do
     setup do
-      @public_project1  = Integrity::Project.new(:name => "awesome")
-      @public_project2  = Integrity::Project.new(:name => "wicked")
-      @private_project  = Integrity::Project.new(:name => "secret", :public => false)
+      @public_project1  = "project"
+      stub(@public_project1).name { "awesome" }
+      stub(@public_project1).public { true }
+      @public_project2  = "project"
+      stub(@public_project2).name { "wicked" }
+      stub(@public_project2).public { true }
+      @private_project  = "project"
+      stub(@private_project).name { "secret" }
+      stub(@private_project).public { false }
 
       @site = "/path/to/file"
       @projects = [@public_project1, @public_project2, @private_project]

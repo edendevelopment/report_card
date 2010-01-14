@@ -1,5 +1,10 @@
 require 'test_helper'
 
+module Integrity
+  module Project
+  end
+end
+
 class ReportCardTest < Test::Unit::TestCase
   context "grading report_card" do
     setup do
@@ -8,7 +13,7 @@ class ReportCardTest < Test::Unit::TestCase
       stub(Integrity).new
       stub(ReportCard).config { @config }
 
-      @project = Integrity::Project.new
+      @project = "project"
     end
 
     should "grade if project name is valid" do
@@ -47,6 +52,7 @@ class ReportCardTest < Test::Unit::TestCase
     should "load if file exists" do
       mock(File).exist?(ReportCard::CONFIG_FILE) { true }
       mock(YAML).load_file(ReportCard::CONFIG_FILE) { @config }
+      stub(ReportCard).require_integrity_path
       assert_equal @config, ReportCard.config
     end
 

@@ -1,9 +1,16 @@
 require 'test_helper'
 
+module Integrity
+  module ProjectBuilder
+  end
+end
+
 class GraderTest < Test::Unit::TestCase
   context "with a grader" do
     setup do
-      @project = Integrity::Project.new(:name => "awesome")
+      @project = "project"
+      stub(@project).name { @project }
+      stub(@project).public { true }
       @config = {'url'  => 'http://metrics.thoughtbot.com',
                  'site' => '/path/to/site'}
       @grader = ReportCard::Grader.new(@project, @config)
@@ -90,7 +97,7 @@ class GraderTest < Test::Unit::TestCase
 
     context "with a private project" do
       setup do
-        @project.public = false
+        stub(@project).public { false }
       end
 
       should "have an announcement message for notification" do
