@@ -1,0 +1,7 @@
+gem "rake"
+gem "cucumber"
+gem "shoulda"
+gem "rr"
+gem "timecop"
+gem "metric_fu"
+gem "tinder"

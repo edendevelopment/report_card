@@ -6,3 +6,5 @@ pkg
 config.yml
 _site/
 integrity/
+vendor/
+bin/
