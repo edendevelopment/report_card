@@ -1,10 +1,8 @@
 $:.unshift(File.dirname(__FILE__))
 
-require 'integrity'
 require 'metric_fu'
 require 'tinder'
 require 'erb'
-
 require 'report_card/index'
 require 'report_card/grader'
 
@@ -32,9 +30,15 @@ module ReportCard
   def self.config
     if File.exist?(CONFIG_FILE)
       @config ||= YAML.load_file(CONFIG_FILE)
+      #require_integrity_path
+      @config
     else
       Kernel.abort("You need a config file at #{CONFIG_FILE}. Check the readme please!")
     end
+  end
+
+  def self.require_integrity_path
+    require File.expand_path(File.join(File.dirname(@config['integrity_config']), "..", "lib", "integrity"))
   end
 
   def self.setup
